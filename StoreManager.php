@@ -24,6 +24,10 @@ class StoreManager
     public function calculateStoreEarnings(int $storeId)
     {
         $totalAmount = 0.0;
+        /**
+         * @todo For better performance we can try
+         * START TRANSACTION READ ONLY
+         */
         foreach ($this->getProducts($storeId) as $product) {
             $orderItemsCount = $this->getOrderItemsCount($product['id']);
 
@@ -45,6 +49,9 @@ class StoreManager
             }
             $totalAmount += $productTotalAmount;
         }
+        /**
+         * @todo COMMIT (see above)
+         */
 
         return $totalAmount;
     }
