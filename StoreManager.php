@@ -28,13 +28,14 @@ class StoreManager
          * @todo For better performance we can try
          * START TRANSACTION READ ONLY
          */
+        $tagCount = $this->getTotalUniqueTags();
+
         foreach ($this->getProducts($storeId) as $product) {
             $orderItemsCount = $this->getOrderItemsCount($product['id']);
 
             $productTotalAmount = $product['price'] * $orderItemsCount;
 
             $tags = $this->getProductTags($product['id']);
-            $tagCount = $this->getTotalUniqueTags();
 
             $productTotalAmount *= (1 + count($tags) / $tagCount);
 
