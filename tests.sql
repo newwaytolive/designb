@@ -23,10 +23,21 @@ GROUP BY u.id
 HAVING sum_total > 1000
 ;
 
-
 -- Show Stores, that have not any Sells
+-- (straightforward approach with LEFT JOIN)
+SELECT DISTINCT s.* FROM `store` s
+LEFT JOIN `product` p ON p.store_id = s.id
+LEFT JOIN `orderitem` oi ON oi.product_id = p.id
+WHERE oi.id IS NULL
+;
 
-
+-- (a bit optimized query)
+SELECT DISTINCT s.* FROM `store` s
+WHERE s.id NOT IN (
+    SELECT DISTINCT p.store_id FROM `product` p
+	INNER JOIN `orderitem` oi ON oi.product_id = p.id
+)
+;
 
 -- Show Mostly sold Tags
 
