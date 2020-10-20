@@ -49,8 +49,11 @@ ORDER BY sells_count DESC
 -- LIMIT 3
 ;
 
-
-
-
 -- Show Monthly Store Earnings Statistics
-
+SELECT s.*,  DATE_FORMAT(o.order_date, '%Y-%m') AS month_of_sales, SUM(p.price) AS sum_total FROM `store` s
+INNER JOIN `product` p  ON p.store_id = s.id
+INNER JOIN `orderitem` oi  ON oi.product_id = p.id
+INNER JOIN `order` o  ON o.id = oi.order_id
+-- WHERE s.id IN (2)
+GROUP BY s.id, month_of_sales
+;
