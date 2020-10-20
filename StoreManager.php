@@ -55,7 +55,7 @@ class StoreManager
     */
     protected function getProducts(int $storeId)
     {
-        $query = 'SELECT * FROM products WHERE store_id = :store';
+        $query = 'SELECT * FROM product WHERE store_id = :store';
 
         return $this->dbManager->getData($query, ['store' => $storeId]);
     }
@@ -67,7 +67,7 @@ class StoreManager
     */
     protected function getOrderItems(int $productId)
     {
-        $query = 'SELECT * FROM order_items WHERE product_id = :product';
+        $query = 'SELECT * FROM orderitem WHERE product_id = :product';
 
         return $this->dbManager->getData($query, ['product' => $productId]);
     }
@@ -79,7 +79,7 @@ class StoreManager
     */
     protected function getProductTags(int $productId)
     {
-        $query = 'SELECT * FROM tags WHERE id IN (SELECT tag_id FROM tag_connects WHERE product_id= :product)';
+        $query = 'SELECT * FROM tag WHERE id IN (SELECT tag_id FROM tagConnect WHERE product_id= :product)';
 
         return $this->dbManager->getData($query, ['product' => $productId]);
     }
@@ -89,7 +89,7 @@ class StoreManager
     */
     public function getTotalUniqueTags()
     {
-        $query = 'SELECT COUNT(DISTINCT name) as count FROM tags';
+        $query = 'SELECT COUNT(DISTINCT tag_name) as count FROM tag';
 
         $result = $this->dbManager->getData($query, []);
 
