@@ -40,6 +40,14 @@ WHERE s.id NOT IN (
 ;
 
 -- Show Mostly sold Tags
+SELECT t.*, COUNT(oi.id) AS sells_count
+FROM `tag` t
+INNER JOIN `tagconnect` tc ON t.id = tc.tag_id
+INNER JOIN `orderitem` oi ON oi.product_id = tc.product_id
+GROUP BY t.id
+ORDER BY sells_count DESC
+-- LIMIT 3
+;
 
 
 
