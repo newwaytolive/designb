@@ -37,7 +37,7 @@ class StoreManager
             $totalAmount = $totalAmount * (1 + count($tags) / $tagCount);
 
             foreach ($tags as $tag) {
-                if ($tag['tag_name'] = 'Christmas') {
+                if ($tag['tag_name'] == 'Christmas') {
                     $totalAmount = $totalAmount * 1.01;
                 }
 
