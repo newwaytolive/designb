@@ -17,7 +17,7 @@ class UserManager
     public function getUserInfo(IUser $user): string
     {
         $userInfo = $user->getInfo();
-        return '// ' . implode(PHP_EOL . '// ', $userInfo);
+        return PHP_EOL . '// ' . implode(PHP_EOL . '// ', $userInfo) . PHP_EOL;
     }
 
 }
