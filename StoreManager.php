@@ -23,29 +23,30 @@ class StoreManager
     */
     public function calculateStoreEarnings(int $storeId)
     {
+        $totalAmount = 0.0;
         foreach ($this->getProducts($storeId) as $product) {
             $orderItems = $this->getOrderItems($product['id']);
 
-            $totalAmount = 0;
-            foreach ($orderItems as $item) {
-                $totalAmount += $item['price'];
-            }
+            $productTotalAmount = $product['price'] * count($orderItems);
 
             $tags = $this->getProductTags($product['id']);
             $tagCount = $this->getTotalUniqueTags();
 
-            $totalAmount = $totalAmount * (1 + count($tags) / $tagCount);
+            $productTotalAmount *= (1 + count($tags) / $tagCount);
 
             foreach ($tags as $tag) {
                 if ($tag['tag_name'] == 'Christmas') {
-                    $totalAmount = $totalAmount * 1.01;
+                    $productTotalAmount *= 1.01;
                 }
 
                 if ($tag['tag_name'] == 'Free') {
-                    $totalAmount = $totalAmount * 0.5;
+                    $productTotalAmount *= 0.5;
                 }
             }
+            $totalAmount += $productTotalAmount;
         }
+
+        return $totalAmount;
     }
 
     /*
