@@ -25,9 +25,9 @@ class StoreManager
     {
         $totalAmount = 0.0;
         foreach ($this->getProducts($storeId) as $product) {
-            $orderItems = $this->getOrderItems($product['id']);
+            $orderItemsCount = $this->getOrderItemsCount($product['id']);
 
-            $productTotalAmount = $product['price'] * count($orderItems);
+            $productTotalAmount = $product['price'] * $orderItemsCount;
 
             $tags = $this->getProductTags($product['id']);
             $tagCount = $this->getTotalUniqueTags();
@@ -76,6 +76,20 @@ class StoreManager
     /*
     * @param int $productId
     *
+    * return int
+    */
+    protected function getOrderItemsCount(int $productId)
+    {
+        $query = 'SELECT COUNT(*) as count FROM orderitem WHERE product_id = :product';
+
+        $result = $this->dbManager->getData($query, ['product' => $productId]);
+
+        return $result['count'];
+    }
+
+    /*
+    * @param int $productId
+    *
     * return array
     */
     protected function getProductTags(int $productId)
@@ -98,7 +112,7 @@ class StoreManager
 
         $result = $this->dbManager->getData($query, []);
 
-        return count($result);
+        return $result['count'];
     }
 
 }
