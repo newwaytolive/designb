@@ -87,7 +87,7 @@ return $this->dbManager->getData($query, [‘product’ => $productId]);
 /*
 * return int
 */
-public static function getTotalUniqueTags()
+public function getTotalUniqueTags()
 {
 $query = 'SELECT COUNT(DISTINCT name) as count FROM tags';
 
