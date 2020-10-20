@@ -1,0 +1,12 @@
+{
+    "name": "sergey/htdocs",
+    "description": "Yet another sales support system",
+    "type": "project",
+    "license": "free",
+    "autoload": {
+        "psr-4": {
+            "user\\": "user/"
+        }
+    },
+    "require": {}
+}
