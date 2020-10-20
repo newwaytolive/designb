@@ -12,6 +12,7 @@ INNER JOIN `order` o  ON o.customer_id = u.id
 INNER JOIN `orderitem` oi  ON oi.order_id = u.id
 INNER JOIN `product` p  ON oi.product_id = p.id
 WHERE p.store_id NOT IN (5)
+;
 
 -- Show Users, that had spent more than $1000
 SELECT u.*, SUM(p.price) AS sum_total FROM `user` u
