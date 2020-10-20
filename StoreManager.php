@@ -32,7 +32,7 @@ class StoreManager
             }
 
             $tags = $this->getProductTags($product['id']);
-            $tagCount = self::getTotalUniqueTags();
+            $tagCount = $this->getTotalUniqueTags();
 
             $totalAmount = $totalAmount * (1 + count($tags) / $tagCount);
 
