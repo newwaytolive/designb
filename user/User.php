@@ -30,7 +30,6 @@ abstract class User implements IUser
      * User constructor.
      * @param integer|null $id
      * @param string $name
-     * @throws \Exception
      */
     public function __construct($id, string $name)
     {

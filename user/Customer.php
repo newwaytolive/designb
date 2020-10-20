@@ -33,7 +33,6 @@ class Customer extends User
      * @param string $name
      * @param float $balance
      * @param int $purchase_count
-     * @throws \Exception
      */
     public function __construct($id, string $name, float $balance, int $purchase_count)
     {
