@@ -89,6 +89,10 @@ class StoreManager
     */
     public function getTotalUniqueTags()
     {
+        /**
+         * @todo As an option for better performance we can consider adding uniq index and remove DISTINCT
+         * ALTER TABLE `tag` ADD UNIQUE INDEX `tag_name` (`tag_name`);
+         */
         $query = 'SELECT COUNT(DISTINCT tag_name) as count FROM tag';
 
         $result = $this->dbManager->getData($query, []);
