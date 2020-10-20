@@ -32,7 +32,7 @@ $totalAmount += $item[‘price’];
 }
 
 $tags = $this->getProductTags($product[‘id’]);
-$tagCount = self:getTotalUniqueTags();
+$tagCount = self::getTotalUniqueTags();
 
 $totalAmount = $totalAmount * (1 + count($tags) / $tagCount);
 
@@ -55,7 +55,7 @@ $totalAmount = $totalAmount * 0.5;
 */
 protected function getProducts(int $storeId)
 {
-$query = ‘SELECT * FROM products WHERE store_id = :store”;
+$query = 'SELECT * FROM products WHERE store_id = :store';
 
 return $this->dbManager->getData($query, [‘store’ => $storeId]);
 }
@@ -67,7 +67,7 @@ return $this->dbManager->getData($query, [‘store’ => $storeId]);
 */
 protected function getOrderItems(int $productId)
 {
-$query = ‘SELECT * FROM order_items WHERE product_id = :product’;
+$query = 'SELECT * FROM order_items WHERE product_id = :product';
 
 return $this->dbManager->getData($query, [‘product’ => $productId]);
 }
@@ -79,7 +79,7 @@ return $this->dbManager->getData($query, [‘product’ => $productId]);
 */
 protected function getProductTags(int $productId)
 {
-$query = ‘SELECT * FROM tags WHERE id IN (SELECT tag_id FROM tag_connects WHERE product_id= :product)’;
+$query = 'SELECT * FROM tags WHERE id IN (SELECT tag_id FROM tag_connects WHERE product_id= :product)';
 
 return $this->dbManager->getData($query, [‘product’ => $productId]);
 }
@@ -89,7 +89,7 @@ return $this->dbManager->getData($query, [‘product’ => $productId]);
 */
 public static function getTotalUniqueTags()
 {
-$query = ‘SELECT COUNT(DISTINCT name) as count FROM tags’;
+$query = 'SELECT COUNT(DISTINCT name) as count FROM tags';
 
 $result = $this->dbManager->getData($query, []);
 
