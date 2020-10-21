@@ -92,7 +92,7 @@ class StoreManager
 
         $result = $this->dbManager->getData($query, ['product' => $productId]);
 
-        return $result['count'];
+        return $result[0]['count'];
     }
 
     /*
@@ -120,7 +120,7 @@ class StoreManager
 
         $result = $this->dbManager->getData($query, []);
 
-        return $result['count'];
+        return $result[0]['count'];
     }
 
 }
