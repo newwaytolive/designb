@@ -56,6 +56,20 @@ class StoreManager
                     $productTotalAmount *= 0.5;
                 }
             }
+            /**
+             * @todo if we can guarantee that product tags are unique,
+             * then we can get rid of the loop
+             * and make the code a bit clearer and faster
+             *
+                $tagNames = array_column($tags, 'tag_name');
+                if (in_array('Christmas', $tagNames)) {
+                    $productTotalAmount *= 1.01;
+                }
+
+                if (in_array('Free', $tagNames)) {
+                    $productTotalAmount *= 0.5;
+                }
+             */
             $totalAmount += $productTotalAmount;
         }
         /**
