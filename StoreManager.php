@@ -33,6 +33,10 @@ class StoreManager
         foreach ($this->getProducts($storeId) as $product) {
             $orderItemsCount = $this->getOrderItemsCount($product['id']);
 
+            if ($orderItemsCount <= 0) {
+                continue;
+            }
+
             $productTotalAmount = $product['price'] * $orderItemsCount;
 
             $tags = $this->getProductTags($product['id']);
